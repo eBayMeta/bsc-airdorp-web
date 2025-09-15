@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/training/index",
+    "pages/team/index",
+    "pages/center/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationBarTitleText": "AIXA"
+  },
+  "usingComponents": {}
+}
