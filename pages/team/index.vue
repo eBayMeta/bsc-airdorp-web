@@ -231,7 +231,7 @@ button {
 	width: 90vw;
 	/* height: 285px; */
 	margin: 0 auto;
-	top: 291px;
+	top: 300px;
 	font-size: 0px;
 	background: linear-gradient(180deg, #141383 0%, #3F1DB1 100%);
 
@@ -248,7 +248,7 @@ button {
 	height: 20px;
 	margin: 18px 0 0 16px;
 	font-family: PingFang SC, var(--default-font-family);
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	line-height: 19.6px;
 	text-align: left;
@@ -309,7 +309,7 @@ button {
 	left: 28px;
 	color: rgba(255, 255, 255, 0.6);
 	font-family: PT Mono, var(--default-font-family);
-	font-size: 10px;
+	font-size: 13px;
 	font-weight: 400;
 	line-height: 11px;
 	text-align: left;
@@ -348,7 +348,7 @@ button {
 	position: relative;
 	height: 20px;
 	font-family: PingFang SC, var(--default-font-family);
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	line-height: 19.6px;
 	text-align: left;
@@ -490,8 +490,8 @@ button {
 
 .vuesax-bold-user-octagon-6 {
 	position: absolute;
-	width: 16px;
-	height: 16px;
+	width: 18px;
+	height: 18px;
 	top: 0;
 	left: 0;
 	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/woCTekkEoY.png) no-repeat center;
@@ -506,7 +506,7 @@ button {
 	height: 14px;
 	color: rgba(255, 255, 255, 0.6);
 	font-family: PingFang SC, var(--default-font-family);
-	font-size: 10px;
+	font-size: 15px;
 	font-weight: 400;
 	line-height: 14px;
 	text-align: left;
@@ -528,7 +528,7 @@ button {
 	color: #ffffff;
 	width: 50%;
 	font-family: PT Mono, var(--default-font-family);
-	font-size: 10px;
+	font-size: 13px;
 	font-weight: 400;
 	line-height: 11px;
 	text-align: left;

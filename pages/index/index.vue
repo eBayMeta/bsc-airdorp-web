@@ -52,7 +52,7 @@
 					</div>
 					<span class="total-users">{{ $t("hom1") }}</span><span class="asia-pacific"></span><span
 						class="text-7">{{data.totalUsers}}
-						<i style="font-size: 10px;font-style: normal;">{{$t("person")}}</i>
+						<i style="font-size: 12px;font-style: normal;">{{$t("person")}}</i>
 					</span>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 					<div class="rectangle-6"></div>
 					<span class="total-training">{{ $t("hom2") }}</span><span
 						class="total-count">{{data.totalTrainingCount}} <i
-							style="font-size: 10px;font-style: normal;">{{$t("time")}}</i></span>
+							style="font-size: 12px;font-style: normal;">{{$t("time")}}</i></span>
 				</div>
 			</div>
 		</div>
@@ -415,7 +415,7 @@
 		top: 5vh;
 		left: 50%;
 		transform: translateX(-50%);
-		font-size: 22px;
+		font-size: 28px;
 		color: #FFF;
 	}
 
@@ -523,7 +523,7 @@
 		height: 20px;
 		margin: 10px 0 0 0;
 		font-family: PingFang SC, var(--default-font-family);
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 600;
 		line-height: 19.6px;
 		text-align: left;
@@ -659,7 +659,7 @@
 		height: 20px;
 		margin: 10px 0 0 0;
 		font-family: PingFang SC, var(--default-font-family);
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 600;
 		line-height: 19.6px;
 		text-align: left;

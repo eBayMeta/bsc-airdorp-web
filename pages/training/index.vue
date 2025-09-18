@@ -343,9 +343,27 @@
 	}
 
 	.train-points {
-		font-size: 18px;
+		/* font-size: 18px;
 		margin-bottom: 5px;
+		display: block; */
+		
 		display: block;
+		position: relative;
+		width: 90vw;
+		height: 20px;
+		/* margin: 26px auto; */
+		font-family: PingFang SC, var(--default-font-family);
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 19.6px;
+		text-align: left;
+		text-transform: capitalize;
+		white-space: nowrap;
+		background: linear-gradient(179.52deg, #87a9ff, #ffffff);
+		z-index: 17;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		
 	}
 
 	.rectangle-9 {
