@@ -23,6 +23,16 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path" : "pages/useLang/useLang",
+			"style" : 
+			{
+				"navigationBarTitleText" : "Switch language",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#2132a1"
+				
+			}
 		}
 		
 		

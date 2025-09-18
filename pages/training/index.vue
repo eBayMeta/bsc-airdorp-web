@@ -14,7 +14,7 @@
 				</div>
 				<span class="aip">{{ training.totalAixa }}</span>
 			</div>
-			<div class="training-reward-increase">
+			<!-- <div class="training-reward-increase">
 				<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_67_2555)">
 						<path
@@ -37,8 +37,7 @@
 				<span style="margin-left: 5px;" class="training-reward-increase-b"> {{ ($t("highest")) }} </span>
 				<span class="reward-500" style="color: #FFE228;"> {{ training.rewardFixed }} </span>
 				<span class="reward-points"> {{ ($t("points")) }} </span>
-
-			</div>
+			</div> -->
 			<div class="icon-tips"></div>
 		</div>
 		<div class="rectangle">
@@ -75,7 +74,10 @@
 					<div class="frame-2" v-show="canBind"><span class="bind-now">{{ $t("Bind Now") }}</span>
 					</div>
 					<div class="frame-2" v-show="Start"><span class="bind-now">
-							<image style="height: 15px;width: 15px;" src="/static/flash.png" mode=""></image>
+							<svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9.44001 6.14644H7.38001V1.34644C7.38001 0.226436 6.77334 -0.000231117 6.03334 0.839769L5.50001 1.44644L0.986674 6.57977C0.366674 7.27977 0.626674 7.8531 1.56001 7.8531H3.62001V12.6531C3.62001 13.7731 4.22667 13.9998 4.96667 13.1598L5.50001 12.5531L10.0133 7.41977C10.6333 6.71977 10.3733 6.14644 9.44001 6.14644Z" fill="white"/>
+							</svg>
+
 							{{ $t("Start training") }}
 						</span></div>
 					<div class="frame-2" v-show="timeShow"><span class="bind-now">
@@ -90,7 +92,7 @@
 
 		<BottomMenu v-show="navshows" :active="'training'"></BottomMenu>
 
-
+		<CustomConfirm :infos="infos" @confirm="confirm" :show="bindShow" :title="$t('SystemPrompt')"></CustomConfirm>
 
 	</div>
 </template>
@@ -100,16 +102,19 @@
 import BottomMenu from '../../components/bottom-menu/index.vue'
 import { getTraining, getPayType, bindTraining, training } from "../../api/index"
 import useBNBTransfer from '@/composables/useBNBTransfer'
-
+	import CustomConfirm from "@/components/message.vue"
 const { sendBNB, debugAmountConversion, error, isLoading } = useBNBTransfer()
 export default {
 	// 在这里注册通用组件
 	components: {
-		BottomMenu
+		BottomMenu,
+		CustomConfirm
 	},
 
 	data() {
 		return {
+			bindShow:false,
+			infos:"messagge",
 			bindAddress: "",
 			title: 'Hello',
 			training: {},
@@ -135,6 +140,9 @@ export default {
 		}
 	},
 	methods: {
+		confirm(){
+			this.bindShow = false
+		},
 		async getTraining() {
 			let data = await getTraining(this.address)
 			this.training = data.data.data
@@ -213,6 +221,8 @@ export default {
 					const transactionHash = await sendBNB(window.sessionStorage.getItem("account"), data1.receiveAddress, data1.receiveAmount)
 					if (transactionHash.txHash) {
 						let data2 = await bindTraining(this.address, transactionHash.txHash, this.bindAddress, data1.receiveAddress, data1.receiveAmount)
+						this.infos = this.$t("bindSucess")
+						this.bindShow = true;
 					}
 					uni.setStorageSync("down", "asdad")
 				}
@@ -222,6 +232,8 @@ export default {
 					const transactionHash = await sendBNB(window.sessionStorage.getItem("account"), data1.receiveAddress, data1.receiveAmount)
 					if (transactionHash.txHash) {
 						let data2 = await training(this.address, transactionHash.txHash, data1.receiveAddress, data1.receiveAmount)
+						this.infos = this.$t("startSucess")
+						this.bindShow = true;
 					}
 				}
 				this.getTraining()

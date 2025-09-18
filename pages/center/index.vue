@@ -75,9 +75,10 @@
 		</div>
 
 
-		<BottomMenu :active="'user'"></BottomMenu>
-
-
+		<BottomMenu  :active="'user'"></BottomMenu>
+		<CustomConfirm :infos="infos" @confirm="confirm" @cancel="cancel" :show="alterCommit"/>
+		<MessageComponent :infos="infos1" @confirm="confirm1" :show="bindShow" :title="$t('SystemPrompt')"/>
+		
 	</div>
 </template>
 
@@ -88,24 +89,32 @@ import BottomMenu from '../../components/bottom-menu/index.vue'
 import { getCenter, withdraw } from "../../api/index"
 import { ConnectionCloseError } from 'web3'
 import confirmUtil from '@/utils/confirm.js'
-
+import CustomConfirm from "@/components/CustomConfirm.vue"
+import MessageComponent from "@/components/message.vue"
 export default {
 	// ✅ 在这里注册通用组件
 	components: {
-		BottomMenu
+		BottomMenu,
+		CustomConfirm,
+		MessageComponent
 	},
 
 	data() {
 		return {
+			infos1:"",
+			bindShow:false,
+			messageShow:true,
 			title: 'Hello',
 			account: "",
 			active: '',
 			tipsCtinm: "",
+			alterCommit:false,
 			userinfo: {
 				teamTotalAIXA: 0,
 				teamTotalUSDC: 0,
 				trainingTotalAIXA: 0
-			}
+			},
+			infos:""
 		}
 	},
 
@@ -118,6 +127,9 @@ export default {
 		}
 	},
 	methods: {
+		confirm1(){
+			this.bindShow = false
+		},
 		fromAddress(address){
 			console.log(address)
 			if(address){
@@ -126,36 +138,30 @@ export default {
 				return "user"
 			}
 		},
-		async withdraw() {
-			console.log(this.$t("tipswithdr") )
-			confirmUtil.show({
-			  title: this.$t("Initiatewithdrawal"),
-			  content: this.$t("tipswithdr") + (this.tipsCtinm == 1 ? ('AIXA:'+this.userinfo.AIXA) :('USDC:'+this.userinfo.USDC)),
-			  confirmText:this.$t("Confirm") ,
-			  cancelText: this.$t("Cancel")
-			}).then(async confirmed => {
-			  if (confirmed) {
-			    // 用户点击确认
-				if (this.tipsCtinm == 1 || this.tipsCtinm == 2) {
-					let data = await withdraw(this.account, this.tipsCtinm == 1 ? 'AIXA' : 'USDC')
-					if(data.data.message == "可用余额不足"){
-						uni.showToast({
-							title:this.$t("alter1")
-						})
-					}else{
-						// 等待链上确认
-						// alert(this.$t("alter2"));
-						uni.showToast({
-							title:this.$t("alter2")
-						})
-					}
+		cancel(){
+			this.alterCommit = false;
+		},
+		async confirm(){
+			console.log("confirm")
+			this.alterCommit = false;
+			if (this.tipsCtinm == 1 || this.tipsCtinm == 2) {
+				let data = await withdraw(this.account, this.tipsCtinm == 1 ? 'AIXA' : 'USDC')
+				if(data.data.message == "可用余额不足"){
+					this.infos1 = this.$t("alter1")
+					this.bindShow = true;
+				}else{
+					this.infos1 = this.$t("alter2")
+					this.bindShow = true;
 				}
-			  } else {
-			    // 用户点击取消
-			  }
-			});
-			
-			
+			}
+		},
+		async withdraw() {
+			// console.log(this.$t("tipswithdr") )
+			if(!this.tipsCtinm){
+				return
+			}
+			this.infos = (this.tipsCtinm == 1 ? ('AIXA:'+this.userinfo.AIXA) :('USDC:'+this.userinfo.USDC))
+			this.alterCommit = true;
 			
 			// console.log("withdraw")
 		},

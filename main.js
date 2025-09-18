@@ -1,14 +1,22 @@
 import App from './App'
 import {createI18n} from 'vue-i18n'
- import en from './locales/en.json'
- import zh from './locales/zh.json'
+import en from './locales/en.json'
+import zh from './locales/zh.json'
+import jp from './locales/jp.json'
+import hy from './locales/hy.json'
+import yy from './locales/yy.json'
+import vi from './locales/vi.json'
 // // 引入语言文件 
 const messages = {
 	en: en,
-	zh: zh
+	zh: zh,
+	jp: jp,
+	hy: hy,
+	yy: yy,
+	vi: vi
 }
 const i18n = createI18n({
-	locale: 'en', // 设置默认语言 
+	locale:uni.getStorageSync("locale")|| 'en', // 设置默认语言 
 	messages, // 设置语言包
 })
 // #ifndef VUE3

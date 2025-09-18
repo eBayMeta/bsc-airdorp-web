@@ -3,7 +3,7 @@
 		"titles": "AIXA Airdrop System is a reward mechanism designed for community users. It distributes tokens as incentives for participating in community activities, promoting the platform, or completing specific tasks. The system is flexible and can provide tiered rewards based on user behavior and level. ",
 	"Invite Link":"Invite Link",
 	 "Direct invite":"Direct invite",
-	 "Boost Score":"Boost Score",
+	 "Boost Score":"contribution value",
 	 "User identity":"User identity",
 	 "Withdraw Reward":"Withdraw Reward",
 	  "Traning Rewards":"Total Traning Rewards",
@@ -27,5 +27,7 @@
 	"Initiatewithdrawal":"Initiate withdrawal",
 	"tipswithdr":"The withdrawal quantity this time",
 	"Confirm":"Confirm",
-	"Cancel":"Cancel"
+	"Cancel":"Cancel",
+	"Confirms":"Confirm",
+	"SystemPrompt":"System Prompt"
 	 }

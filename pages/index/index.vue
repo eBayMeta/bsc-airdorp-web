@@ -4,9 +4,16 @@
 			<div class="logo"></div>
 			<div class="rights">
 				<div v-show="show" @click="connectWallet" class="rectangle"><span class="connect">Connect</span></div>
-				<div @click="changeLanguage()" class="vuesax-linear-global"></div>
+				<div  @click="islang=!islang" class="vuesax-linear-global">
+					<!-- 增加一个语言切换菜单 -->
+				</div>
 			</div>
 		</div>
+		<div v-show="islang" class="language-menu" style="position: absolute;right: 25px;top:40px;z-index:30">
+			<div v-for="lang in languages" :key="lang.code" @click="changeLanguage(lang.code)">
+				{{ lang.name }}
+			</div>
+		</div><strong></strong>
 		<span class="project-name">
 			{{$t('ProjectName')}}</span><span class="project-introduction">{{$t('titles')}}</span>
 		<div class="flex-row-d">
@@ -93,8 +100,7 @@
 		</div>
 
 		<BottomMenu :active="'home'"></BottomMenu>
-
-
+	
 	</div>
 
 
@@ -108,17 +114,52 @@
 		getList
 	} from "../../api/index"
 	import {detectAndSwitchToBNB} from "../../composables/useBNBContent.js"
+	import CustomConfirm from "@/components/message.vue"
 	export default {
 		// ✅ 在这里注册通用组件
 		components: {
-			BottomMenu
+			BottomMenu,
+			CustomConfirm
 		},
 
 		data() {
 			return {
+				islang:false,
 				title: 'Hello',
 				show: false,
-				data: {}
+				data: {},
+					languages: [
+					{
+						code: 'zh',
+						name: '中文',
+						flag: '/static/cha (1).png'
+					},
+					{
+						code: 'en',
+						name: 'English',
+						flag: '/static/mg.png'
+					},
+					{
+						code: 'jp',
+						name: '日本語',
+						flag: '/static/ri.png'
+					},
+					{
+						code: 'hy',
+						name:"한국어",
+						flag: '/static/han.png'
+					},
+					// {
+					// 	code: 'yy',
+					// 	name:"粤语",
+					// 	flag: '/static/ao.png'
+					// },
+					{
+						code: 'vi',
+						name:"Tiếng Việt",
+						flag: '/static/yue.png'
+					}
+				]
 			}
 		},
 		mounted() {
@@ -164,13 +205,50 @@
 
 		},
 		methods: {
+			changeLanguage(locale) {
+				console.log(locale)
+				this.$i18n.locale = locale;
+				uni.setStorageSync("locale",locale)
+				let message = '';
+				switch(locale) {
+					case 'zh':
+						message = '语言已切换为中文';
+						break;
+					case 'en':
+						message = 'Language switched to English';
+						break;
+					case 'jp':
+						message = '言語が日本語に切り替えられました';
+						break;
+					case 'hy':
+						message = '언어가 한국어로 전환되었습니다';
+						break;
+					case 'yy':
+						message = '語言已切換為粵語';
+						break;
+					case 'vi':
+						message = 'Ngôn ngữ đã chuyển sang tiếng Việt';
+						break;
+					default:
+						message = 'Language switched';
+				}
+				uni.showToast({
+					title: message,
+					icon: 'success',
+					duration: 1500
+				});
+				this.islang = false
+			},
 			async getList() {
 				let data = await getList(window.sessionStorage.getItem("account"));
 				this.data = data.data.data
 			},
-			changeLanguage() {
-				this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en'; // 切换语言
-			},
+			// changeLanguage() {
+			// 	uni.navigateTo({
+			// 		url:"/pages/useLang/useLang"
+			// 	})
+			// 	// this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en'; // 切换语言
+			// },
 			async connectWallet() {
 				try {
 					uni.setStorageSync("isconnrctWallet",
@@ -305,7 +383,7 @@
 		text-transform: uppercase;
 		white-space: nowrap;
 		background: linear-gradient(172.16deg, #B9CDFF 6.05%, #FFFFFF 51%);
-		z-index: 36;
+		z-index: 16;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		left: 0;
@@ -330,7 +408,7 @@
 		font-weight: 500;
 		line-height: 16.8px;
 		text-align: center;
-		z-index: 37;
+		z-index: 16;
 		top: 5vh;
 		left: 50%;
 		transform: translateX(-50%);
@@ -616,5 +694,18 @@
 		background-size: 100% 100%;
 		overflow: hidden;
 		/* background: url(/static/home.mp4); */
+	}
+	.language-menu {
+		width: 30vw;
+		background-color: #FFF;
+		position: relative;
+	}
+	.language-menu{
+		border-radius: 10px;
+	}
+	.language-menu>div{
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
 	}
 </style>
