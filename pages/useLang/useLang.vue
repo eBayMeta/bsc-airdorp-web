@@ -40,12 +40,12 @@
 						code: 'hy',
 						name:"한국어",
 						flag: '/static/han.png'
-					},
-					// {
-					// 	code: 'yy',
-					// 	name:"粤语",
-					// 	flag: '/static/ao.png'
-					// },
+				},
+				{
+					code: 'yy',
+					name:"粤语",
+					flag: '/static/ao.png'
+				},
 					{
 						code: 'vi',
 						name:"Tiếng Việt",

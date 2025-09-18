@@ -4,7 +4,7 @@
 			<div class="logo"></div>
 			<div class="rights">
 				<div v-show="show" @click="connectWallet" class="rectangle"><span class="connect">Connect</span></div>
-				<div  @click="islang=!islang" class="vuesax-linear-global">
+				<div @click="islang=!islang" class="vuesax-linear-global">
 					<!-- 增加一个语言切换菜单 -->
 				</div>
 			</div>
@@ -14,8 +14,13 @@
 				{{ lang.name }}
 			</div>
 		</div><strong></strong>
-		<span class="project-name">
-			{{$t('ProjectName')}}</span><span class="project-introduction">{{$t('titles')}}</span>
+		<span class="project-name ">
+			<!-- {{$t('ProjectName')}} -->
+			<img style="width: 30%;" src="/static/LOGOshu.png" alt="" />
+		</span>
+
+
+		<span class="project-introduction" :class="{'zhlacosas':$i18n.locale=='zh'?true:false}">{{$t('titles')}}</span>
 		<div class="flex-row-d">
 			<div class="rectangle-1">
 				<div class="flex-column-f">
@@ -45,8 +50,7 @@
 					<div class="rectangle-3">
 
 					</div>
-					<span class="total-users">{{ $t("hom1") }}</span><span
-						class="asia-pacific">({{$t("Asia-Pacific region")}})</span><span
+					<span class="total-users">{{ $t("hom1") }}</span><span class="asia-pacific"></span><span
 						class="text-7">{{data.totalUsers}}
 						<i style="font-size: 10px;font-style: normal;">{{$t("person")}}</i>
 					</span>
@@ -90,8 +94,6 @@
 			</div>
 		</div>
 
-
-
 		<div class="bg-home">
 			<!-- <video object-fit="cover" id="myVideo" :controls="false" src="/static/main-hero.mp4" playsinline="playsinline"
 				controlsList="nodownload nofullscreen" autoplay="autoplay" muted="muted" loop="loop"
@@ -100,7 +102,7 @@
 		</div>
 
 		<BottomMenu :active="'home'"></BottomMenu>
-	
+
 	</div>
 
 
@@ -113,7 +115,9 @@
 	import {
 		getList
 	} from "../../api/index"
-	import {detectAndSwitchToBNB} from "../../composables/useBNBContent.js"
+	import {
+		detectAndSwitchToBNB
+	} from "../../composables/useBNBContent.js"
 	import CustomConfirm from "@/components/message.vue"
 	export default {
 		// ✅ 在这里注册通用组件
@@ -124,21 +128,21 @@
 
 		data() {
 			return {
-				islang:false,
+				islang: false,
 				title: 'Hello',
 				show: false,
 				data: {},
-					languages: [
+				languages: [{
+						code: 'en',
+						name: 'English',
+						flag: '/static/mg.png'
+					},
 					{
 						code: 'zh',
 						name: '中文',
 						flag: '/static/cha (1).png'
 					},
-					{
-						code: 'en',
-						name: 'English',
-						flag: '/static/mg.png'
-					},
+
 					{
 						code: 'jp',
 						name: '日本語',
@@ -146,7 +150,7 @@
 					},
 					{
 						code: 'hy',
-						name:"한국어",
+						name: "한국어",
 						flag: '/static/han.png'
 					},
 					// {
@@ -154,19 +158,19 @@
 					// 	name:"粤语",
 					// 	flag: '/static/ao.png'
 					// },
-					{
-						code: 'vi',
-						name:"Tiếng Việt",
-						flag: '/static/yue.png'
-					}
+					// {
+					// 	code: 'vi',
+					// 	name:"Tiếng Việt",
+					// 	flag: '/static/yue.png'
+					// }
 				]
 			}
 		},
 		mounted() {
-			detectAndSwitchToBNB().then(e=>{
-				if(!e){
+			detectAndSwitchToBNB().then(e => {
+				if (!e) {
 					uni.showToast({
-						text:"请切换到BNB网络"
+						text: "请切换到BNB网络"
 					})
 				}
 			})
@@ -208,9 +212,9 @@
 			changeLanguage(locale) {
 				console.log(locale)
 				this.$i18n.locale = locale;
-				uni.setStorageSync("locale",locale)
+				uni.setStorageSync("locale", locale)
 				let message = '';
-				switch(locale) {
+				switch (locale) {
 					case 'zh':
 						message = '语言已切换为中文';
 						break;
@@ -326,7 +330,7 @@
 	.logo {
 		width: 119px;
 		height: 35px;
-		background: url(/static/logo.png) no-repeat center;
+		/* background: url(/static/logo.png) no-repeat center; */
 		background-size: cover;
 		z-index: 17;
 	}
@@ -403,15 +407,16 @@
 		width: 327px;
 		height: 34px;
 		color: rgba(255, 255, 255, 0.6);
-		font-family: PingFang SC, var(--default-font-family);
-		font-size: 12px;
+		font-family: 'Aldo the Apache';
 		font-weight: 500;
-		line-height: 16.8px;
+		line-height: 34px;
 		text-align: center;
 		z-index: 16;
 		top: 5vh;
 		left: 50%;
 		transform: translateX(-50%);
+		font-size: 22px;
+		color: #FFF;
 	}
 
 	.flex-row-d {
@@ -518,7 +523,7 @@
 		height: 20px;
 		margin: 10px 0 0 0;
 		font-family: PingFang SC, var(--default-font-family);
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 		line-height: 19.6px;
 		text-align: left;
@@ -654,7 +659,7 @@
 		height: 20px;
 		margin: 10px 0 0 0;
 		font-family: PingFang SC, var(--default-font-family);
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 		line-height: 19.6px;
 		text-align: left;
@@ -695,17 +700,27 @@
 		overflow: hidden;
 		/* background: url(/static/home.mp4); */
 	}
+
 	.language-menu {
 		width: 30vw;
 		background-color: #FFF;
 		position: relative;
 	}
-	.language-menu{
+
+	.language-menu {
 		border-radius: 10px;
 	}
-	.language-menu>div{
+
+	.language-menu>div {
 		height: 30px;
 		line-height: 30px;
 		text-align: center;
+	}
+
+	.zhlacosas {
+		content: " ";
+		/* 创建一个伪元素 */
+		font-family: "DIN-Medium-2", "SimHei", sans-serif;
+		/* 中文 */
 	}
 </style>

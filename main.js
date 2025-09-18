@@ -16,7 +16,7 @@ const messages = {
 	vi: vi
 }
 const i18n = createI18n({
-	locale:uni.getStorageSync("locale")|| 'en', // 设置默认语言 
+	locale: 'en', // 设置默认语言 
 	messages, // 设置语言包
 })
 // #ifndef VUE3

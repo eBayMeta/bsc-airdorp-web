@@ -6,4 +6,13 @@
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'DIN-Medium-2';
+    src: url('DIN-Medium-2.otf') format('otf'),
+        url('DIN-Medium-2.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 

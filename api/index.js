@@ -68,3 +68,11 @@ export const getPayType = (payTyep) => {
         method: 'GET'
     })
 }
+
+
+export const getPushCount = (userAddress) => {
+    return uni.request({
+        url:'https://api.aixa.live/contribution/getPushCount?userAddress='+userAddress,
+        method: 'GET'
+    })
+}

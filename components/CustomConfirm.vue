@@ -4,12 +4,12 @@
 		<view class="custom-confirm-container" @tap.stop>
 			<img src="@/static/img_withdrawal.png" class="iamgesd" alt="" />
 			<view class="confirm-header" v-if="title">
-				<text class="confirm-title">{{ title }}</text>
+				<text class="confirm-title">{{ title||$t("InitiateWithdrawal") }}</text>
 			</view>
 
 			<view class="confirm-content">
 				<text class="confirm-message">
-					The withdrawal quantity this time
+					{{$t("WithdrawalQuantity")}}
 				</text>
 				<h3 class="confirm-info">
 					{{infos}}
@@ -42,7 +42,7 @@
 			},
 			title: {
 				type: String,
-				default: 'Initiate withdrawal'
+				// default: this.
 			},
 			message: {
 				type: String,

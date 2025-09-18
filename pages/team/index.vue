@@ -8,9 +8,9 @@
 			<div class="rectangle">
 				<span class="invite-link">{{ $t('Invite Link') }}</span>
 				<div @click="copyd" class="rectangle-2">
-					<div class="edit-copy"></div>
 					<div class="icon-link"></div>
 					<span class="xf-fa-db">{{ data.inviteLink }}</span>
+					<div class="edit-copy"></div>
 				</div>
 				<div class="line"></div>
 				<div  class="flex-row-fe">
@@ -24,8 +24,8 @@
 								<div class="icon-users-5">
 									<div class="vuesax-bold-user-octagon-6"></div>
 								</div>
-								<span class="text-6">{{ e.createTime }}</span><span
-									class="text-7">{{ e.userAddress }}</span>
+								<span @click="movetoC(e)" class="text-6">{{$t("Details")}}{{">"}}</span>
+								<span class="text-7">{{ e.userAddress }}</span>
 							</div>
 
 						</div>
@@ -43,12 +43,14 @@
 				<div class="ellipse-22"></div>
 				<div class="ellipse-23"></div>
 				<span class="lv-i">Lv {{ numberToRoman(data.contributionLevel) }}</span><span
-					class="slash">{{ data.contributionValue || 0 }}/100</span><span class="boost-score">{{ $t("Boost Score")}}</span>
+					class="slash">{{ data.contributionValue || 0 }}/100</span>
+					<span class="boost-score">{{ $t("Boost Score")}}</span>
 			</div>
 			<div class="img-team-right"></div>
 			<!-- <div class="img-team-left"></div> -->
 		</div>
 		<BottomMenu :active="'team'"></BottomMenu>
+		<messageModel :infos="infos" @confirm="messageCommit" :address="ttsaddress" :show="messageCommitshow"/>
 	</div>
 </template>
 
@@ -56,19 +58,27 @@
 <script>
 
 import BottomMenu from '../../components/bottom-menu/index.vue'
-import { getcontribution, getPushList } from '../../api/index.js'
+import { getcontribution, getPushList,getPushCount } from '../../api/index.js'
 import { copyText } from '../../composables/useCopyText.js'
+import messageModel from "../../components/model.vue"
 export default {
 	// ✅ 在这里注册通用组件
 	components: {
-		BottomMenu
+		BottomMenu,
+		messageModel,
 	},
 
 	data() {
 		return {
+			messageCommitshow:false,
+			ttsaddress:"",
 			title: 'Hello',
 			data: {},
-			address: []
+			infos:"",
+			address: [
+				
+				
+			]
 		}
 	},
 
@@ -81,6 +91,17 @@ export default {
 		}	
 	},
 	methods: {
+		messageCommit(){
+			this.messageCommitshow = false
+		},
+		async  movetoC(e){
+			console.log(e)
+			this.ttsaddress= e.oldaddress
+			let data = await getPushCount(this.ttsaddress);
+			console.log(data.data.data.totalCount)
+			this.infos = data.data.data.totalCount
+			this.messageCommitshow = true;
+		},
 		copyd(){
 			console.log(this.data.inviteLink)
 			copyText(this.data.inviteLink)
@@ -110,8 +131,17 @@ export default {
 			let data = await getcontribution(this.account);
 			this.data = data.data.data
 			let str = await getPushList(this.account)
-			this.address = str.data.data.content
-			
+			this.address = str.data.data.content.map(e=>{
+				e.oldaddress = e.userAddress;
+				e.userAddress = e.userAddress.substr(0,15) + "......" +e.userAddress.substr(e.userAddress.length-8,8) 
+				return e;
+			})
+			// this.address = this.address.map(e=>{
+			// 	e.oldaddress = e.userAddress;
+			// 	e.userAddress = e.userAddress.substr(0,15) + "......" +e.userAddress.substr(e.userAddress.length-8,8) 
+				
+			// 	return e;
+			// })
 		}
 	}
 }
@@ -199,11 +229,12 @@ button {
 .rectangle {
 	position: relative;
 	width: 90vw;
-	height: 285px;
+	/* height: 285px; */
 	margin: 0 auto;
-	top: 43vh;
+	top: 291px;
 	font-size: 0px;
-	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/KQbrZvmyEL.png) no-repeat center;
+	background: linear-gradient(180deg, #141383 0%, #3F1DB1 100%);
+
 	background-size: cover;
 	z-index: 22;
 	overflow: visible auto;
@@ -217,7 +248,7 @@ button {
 	height: 20px;
 	margin: 18px 0 0 16px;
 	font-family: PingFang SC, var(--default-font-family);
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	line-height: 19.6px;
 	text-align: left;
@@ -232,20 +263,24 @@ button {
 .rectangle-2 {
 	position: relative;
 	width: 90%;
-	height: 34px;
-	margin: 15px 5%;
+	height: 40px;
+	margin: 10px 5%;
 	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/2WzOYBAGco.png) no-repeat center;
 	background-size: cover;
 	z-index: 64;
 	border-radius: 6px;
+	margin-bottom: 0;
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-around;
 }
 
 .edit-copy {
-	position: absolute;
+	/* position: absolute; */
 	width: 6.1%;
 	height: 52.94%;
-	top: 23.53%;
-	left: 90.51%;
+	/* top: 23.53%;
+	left: 90.51%; */
 	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/hgrofGD0LO.png) no-repeat center;
 	background-size: 100% 100%;
 	z-index: 67;
@@ -253,11 +288,11 @@ button {
 }
 
 .icon-link {
-	position: absolute;
-	width: 12px;
-	height: 12px;
-	top: 11px;
-	left: 10px;
+	/* position: absolute; */
+	width: 15px;
+	height: 15px;
+	/* top: 11px;
+	left: 10px; */
 	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/d5NOERiDcO.png) no-repeat center;
 	background-size: cover;
 	z-index: 66;
@@ -268,7 +303,7 @@ button {
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
-	position: absolute;
+	/* position: absolute; */
 	height: 11px;
 	top: 12px;
 	left: 28px;
@@ -288,11 +323,12 @@ button {
 
 .line {
 	position: relative;
-	width: 295px;
+	width: 90%;
 	height: 0.5px;
-	margin: 26.5px 0 0 16px;
+	margin: 16px auto;
 	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-11/kWd1if0XzK.png) no-repeat center;
 	background-size: cover;
+	border: 0.5px solid #FFFFFF1A;
 	z-index: 68;
 }
 
@@ -312,7 +348,7 @@ button {
 	position: relative;
 	height: 20px;
 	font-family: PingFang SC, var(--default-font-family);
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	line-height: 19.6px;
 	text-align: left;
@@ -979,7 +1015,7 @@ button {
 .img-level {
 	position: absolute;
 	width: 90vw;
-	height: 264px;
+	height: 291px;
 	top: 0;
 	left: 5vw;
 	background: url(/static/img_level.png) no-repeat center;
@@ -1057,12 +1093,12 @@ button {
 	justify-content: center;
 	position: absolute;
 	width: 73px;
-	height: 12px;
-	top: 169.594px;
+	height: 14px;
+	top: 183px;
 	left: calc(50% - 36.53px);
 	color: rgba(255, 255, 255, 0.4);
 	font-family: PT Mono, var(--default-font-family);
-	font-size: 10.99975872039795px;
+	font-size: 14px;
 	font-weight: 400;
 	line-height: 12px;
 	text-align: center;
