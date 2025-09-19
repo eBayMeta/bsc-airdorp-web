@@ -522,7 +522,7 @@
 		left: calc(50% - 54.5px);
 		color: #ffffff;
 		font-family: PingFang SC, var(--default-font-family);
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 600;
 		line-height: 19.6px;
 		text-align: center;

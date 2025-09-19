@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Aldo the Apache';
+    src: url('AldotheApache.woff2') format('woff2'),
+        url('AldotheApache.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'DIN-Medium-2';
+    src: url('DIN-Medium-2.otf') format('otf'),
+        url('DIN-Medium-2.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+

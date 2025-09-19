@@ -45,11 +45,12 @@
 					<!-- 0x405f4FA0d255bC4A980F464936d1EAdeA12A298F -->
 				</span>
 			</div>
+			
 			<div class="img-button1">
 				<div @click="bind" v-show="!isloading" class="frame1">
-					<div class="frame-2" v-show="canBind"><span class="bind-now">{{ $t("Bind Now") }}</span>
+					<div class="frame-2" v-show="canBind"><span class="bind-now" style="font-size: 20px;">{{ $t("Bind Now") }}</span>
 					</div>
-					<div class="frame-2" v-show="Start"><span class="bind-now">
+					<div class="frame-2" v-show="Start"><span class="bind-now" style="font-size: 20px;">
 							<svg width="11" height="14" viewBox="0 0 11 14" fill="none"
 								xmlns="http://www.w3.org/2000/svg">
 								<path
@@ -71,6 +72,7 @@
 						</span>
 					</div>
 				</div>
+				
 				<div v-show="isloading" class="frame1">
 					<div class="frame-2">
 						<span class="bind-now logidng">
@@ -332,7 +334,7 @@
 		z-index: 16;
 		border-radius: 16px;
 		backdrop-filter: blur(1px);
-		margin: 30px 10px;
+		margin: 50px 10px;
 		margin-bottom: 0;
 		border: 0.5px solid;
 		border-image-source: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 100%);
@@ -397,7 +399,7 @@
 
 	.rectangle {
 		/* height: 407px; */
-		margin: 15px;
+		margin: 35px 15px 15px 15px;
 		background: linear-gradient(180deg, #14169E 0%, #3F1DB1 100%);
 		background-size: cover;
 		z-index: 17;
