@@ -36,4 +36,13 @@
 	.uni-modal__bd{
 		color:#FFF;
 	}
+	
+	/* 全局背景色 */
+	.page {
+	  background-color: #0d104f;
+	}
+	
+	body {
+	  background-color: #0d104f;
+	}
 </style>

@@ -33,12 +33,10 @@
 				"navigationBarBackgroundColor": "#2132a1"
 				
 			}
-		}
-		
-		
-		
-		
+		} 
 	],
+	
+	
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#F8F8F8",
