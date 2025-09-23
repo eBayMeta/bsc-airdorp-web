@@ -112,13 +112,12 @@
 
 <script>
 	import BottomMenu from '../../components/bottom-menu/index.vue'
-	import {
-		getList
-	} from "../../api/index"
-	import {
-		detectAndSwitchToBNB
-	} from "../../composables/useBNBContent.js"
+	import { getList } from "../../api/index"
+	import { detectAndSwitchToBNB } from "../../composables/useBNBContent.js"
 	import CustomConfirm from "@/components/message.vue"
+	
+	
+	
 	export default {
 		// ✅ 在这里注册通用组件
 		components: {
@@ -404,7 +403,7 @@
 		align-items: flex-start;
 		justify-content: center;
 		position: relative;
-		width: 327px;
+		width: 336px;
 		height: 34px;
 		color: rgba(255, 255, 255, 0.6);
 		font-family: 'Aldo the Apache';
@@ -415,7 +414,7 @@
 		top: 5vh;
 		left: 50%;
 		transform: translateX(-50%);
-		font-size: 28px;
+		font-size: 24px;
 		color: #FFF;
 	}
 

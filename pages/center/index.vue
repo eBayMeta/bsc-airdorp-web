@@ -400,7 +400,7 @@
 		margin: 44px 0 0 16px;
 		color: #ffffff;
 		font-family: DIN-Alternate-Widget, var(--default-font-family);
-		font-size: 28.15999984741211px;
+		font-size: 23px;
 		font-weight: 700;
 		line-height: 32.56px;
 		text-align: left;
@@ -459,7 +459,7 @@
 		margin: 44px 0 0 16px;
 		color: #ffffff;
 		font-family: DIN-Alternate-Widget, var(--default-font-family);
-		font-size: 28.15999984741211px;
+		font-size: 23px;
 		font-weight: 700;
 		line-height: 32.56px;
 		text-align: left;

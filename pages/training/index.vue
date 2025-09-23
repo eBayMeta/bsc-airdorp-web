@@ -411,7 +411,7 @@
 		overflow: hidden;
 	}
 
-	.bind-to-superior {
+	/* .bind-to-superior {
 		display: block;
 		height: 20px;
 		font-family: PingFang SC, var(--default-font-family);
@@ -426,7 +426,27 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		margin-top: 10px;
+	} */
+	
+	
+	.bind-to-superior { 
+		display: block;
+		position: relative;
+		width: 90vw;
+		height: 20px;
+		font-family: PingFang SC, var(--default-font-family);
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 19.6px;
+		text-align: left;
+		text-transform: capitalize;
+		white-space: nowrap;
+		background: linear-gradient(179.52deg, #87a9ff, #ffffff);
+		z-index: 17;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
+	
 
 	.rectangle-1 {
 		position: relative;
