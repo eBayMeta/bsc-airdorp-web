@@ -107,6 +107,7 @@
 		bindTraining,
 		training
 	} from "../../api/index"
+	import { getList } from "../../api/index"
 	import useBNBTransfer from '@/composables/useBNBTransfer'
 	import CustomConfirm from "@/components/message.vue"
 	const {
@@ -115,13 +116,13 @@
 		error,
 		isLoading
 	} = useBNBTransfer()
+	import { detectAndSwitchToBNB } from "../../composables/useBNBContent.js"
 	export default {
 		// 在这里注册通用组件
 		components: {
 			BottomMenu,
 			CustomConfirm
 		},
-
 		data() {
 			return {
 				isloading: false,
@@ -141,17 +142,37 @@
 			uni.setStorageSync("down", "")
 		},
 
-
 		async onShow() {
+			detectAndSwitchToBNB().then(e => {
+				if (!e) {
+					uni.showToast({
+						text: "请切换到BNB网络"
+					})
+				}
+			})
+			window.ethereum.request({
+				method: 'wallet_addEthereumChain',
+				params: [{
+					chainId: '0x38', // BSC主网链ID
+					chainName: 'Binance Smart Chain',
+					nativeCurrency: {
+						name: 'BNB',
+						symbol: 'BNB',
+						decimals: 18
+					},
+					rpcUrls: ['https://bsc-dataseed.binance.org/'],
+					blockExplorerUrls: ['https://bscscan.com']
+				}]
+			});
 			if (!window.sessionStorage.getItem("account")) {
 				try {
-					uni.setStorageSync("isconnrctWallet",
-						"true")
+					uni.setStorageSync("isconnrctWallet","true")
 					const accounts = await window.ethereum.request({
 						method: 'eth_requestAccounts'
 					});
 					this.accounts = accounts;
 					window.sessionStorage.setItem("account", this.accounts)
+					await this.getList()
 				} catch (error) {
 					console.error('用户拒绝授权:', error);
 				}
@@ -165,6 +186,10 @@
 			}
 		},
 		methods: {
+			async getList() {
+				let data = await getList(window.sessionStorage.getItem("account"));
+				this.data = data.data.data
+			},
 			confirm() {
 				this.bindShow = false
 			},
