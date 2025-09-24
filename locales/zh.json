@@ -1,7 +1,7 @@
 {
   "WithdrawalQuantity": "本次提现数量",
   "InitiateWithdrawal": "发起提现",
-	"ProjectName": "AIXA",
+	"ProjectName": "AIX",
 	"CurrentAddress": "当前地址",
 	"DirectReferrals": "邀请人数",
 	"hello": "你好, {name}！",

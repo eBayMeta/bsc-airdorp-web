@@ -21,7 +21,7 @@
 			<div :class="{ 'active': tipsCtinm == 1 }" @click="tipsCtinm = tipsCtinm == 1 ? 0 : 1" class="rectangle-3">
 				<span class="comma">{{ userinfo['AIXA'] }}</span>
 				<div class="rectangle-4"></div>
-				<span class="usdc">AIXA</span>
+				<span class="usdc">AIX</span>
 			</div>
 			<div :class="{ 'active': tipsCtinm == 2 }" @click="tipsCtinm = tipsCtinm == 2 ? 0 : 2" class="rectangle-5">
 				<span class="comma-6">{{ userinfo['USDC'] }}</span>
@@ -36,14 +36,14 @@
 		<div class="rectangle-8">
 			<div class="rectangle-9"></div>
 			<div>
-				<span class="number-20304">{{ userinfo.trainingTotalAIXA }}</span><span class="usdc-12">AIXA</span>
+				<span class="number-20304">{{ userinfo.trainingTotalAIXA }}</span><span class="usdc-12">AIX</span>
 			</div>
 		</div>
 		<span class="team-rewards">{{ $t("Team Rewards") }}</span>
 		<div class="rectangle-b">
 			<div class="rectangle-c"></div>
 			<div>
-				<span class="number-20304-d">{{ userinfo.teamTotalAIXA }}</span><span class="usdc-12">AIXA</span>
+				<span class="number-20304-d">{{ userinfo.teamTotalAIXA }}</span><span class="usdc-12">AIX</span>
 			</div>
 		</div>
 		<div class="rectangle-f">
@@ -169,7 +169,7 @@
 				if (!this.tipsCtinm) {
 					return
 				}
-				this.infos = (this.tipsCtinm == 1 ? ('AIXA:' + this.userinfo.AIXA) : ('USDC:' + this.userinfo.USDC))
+				this.infos = (this.tipsCtinm == 1 ? ('AIX:' + this.userinfo.AIXA) : ('USDC:' + this.userinfo.USDC))
 				this.alterCommit = true;
 
 				// console.log("withdraw")

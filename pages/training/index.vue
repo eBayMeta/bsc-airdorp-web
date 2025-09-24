@@ -10,7 +10,7 @@
 				<div style="display:flex;align-items: center;">
 					<div class="rectangle-a" style="margin-right: 5px;">
 					</div>
-					<span class="comma"> AIXA</span>
+					<span class="comma"> AIX</span>
 				</div>
 				<span class="aip">{{ training.totalAixa }}</span>
 			</div>
@@ -140,6 +140,9 @@
 		},
 		onLoad() {
 			uni.setStorageSync("down", "")
+			if (this.$route.query.invite) {
+			   window.sessionStorage.setItem("invite", this.$route.query.invite)
+			}
 		},
 
 		async onShow() {
